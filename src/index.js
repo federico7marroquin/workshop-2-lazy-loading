@@ -9,7 +9,6 @@ import { registerImage } from './lazy'
 
 const baseUrl ='https://randomfox.ca/images/'
 const appNode = document.querySelector('#images')
-
  const loadFoxyImage = () => {
 
     const container = document.createElement('div')
@@ -21,15 +20,32 @@ const appNode = document.querySelector('#images')
     image.width = '320'
     image.alt = 'foxie'
 
+
     container.append(image)
            
     appNode.append(container)
     registerImage(container)
  }
 
+ const cleanFoxyImages = () => {
+   [ ...appNode.childNodes].forEach(foxyImage => foxyImage.remove())
+ }
+
  const button = document.createElement('button')
  button.onclick = () => loadFoxyImage() 
  button.innerHTML = 'Carga un zorrito'
- button.className = 'p-3'
- appNode.insertAdjacentElement( 'beforebegin', button)
+ button.className = 'mt-5 p-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded block mx-auto'
+ 
+ const cleanButton = document.createElement('button')
+ cleanButton.onclick = () => cleanFoxyImages() 
+ cleanButton.innerHTML = 'Borrar zorritos'
+ cleanButton.className = 'mt-5 p-3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded block mx-auto'
+ 
+ const buttonsDiv = document.createElement('div')
+ buttonsDiv.append(button, cleanButton)
+ 
+ appNode.insertAdjacentElement( 'beforebegin', buttonsDiv)
+
+
+
 
